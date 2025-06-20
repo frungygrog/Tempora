@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bk0ofb078cvgm"]
+[gd_scene load_steps=24 format=3 uid="uid://bk0ofb078cvgm"]
 
 [ext_resource type="Script" uid="uid://dusnn5jykij57" path="res://Classes/Visual/Main.cs" id="1_n5xe1"]
 [ext_resource type="AudioStream" uid="uid://2gpllbqn0qef" path="res://Audio/clickedy.mp3" id="2_k0owh"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://mw86i63feiar" path="res://Classes/Visual/MessageLabel.cs" id="20_c3wmk"]
 [ext_resource type="PackedScene" uid="uid://dsfi6js7yjf8n" path="res://Classes/Visual/Menus/ExportWindow.tscn" id="20_ruqaf"]
 [ext_resource type="PackedScene" uid="uid://cs8bpklo1qehp" path="res://Classes/Visual/Menus/VisualSettingsWindow.tscn" id="22_ww5mi"]
+[ext_resource type="FontFile" path="res://Fonts/TorusBoldFont.tres" id="1001"]
 
 [node name="Main" type="Control" node_paths=PackedStringArray("audioVisualsContainer", "blockScrollBar", "backgroundColorRect")]
 layout_mode = 3
@@ -62,6 +63,7 @@ layout_mode = 2
 
 [node name="FileButton" parent="VSplitContainer/TopMenuHBox" node_paths=PackedStringArray("popupMenu") instance=ExtResource("3_mrr0o")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1001")
 theme_override_font_sizes/font_size = 16
 text = "File"
 popupMenu = NodePath("File")
@@ -94,6 +96,7 @@ clearAllConfirmationDialog = NodePath("../../../../ClearAllConfirmationDialog")
 
 [node name="OptionsButton" parent="VSplitContainer/TopMenuHBox" node_paths=PackedStringArray("popupMenu") instance=ExtResource("3_mrr0o")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1001")
 theme_override_font_sizes/font_size = 16
 text = "Options"
 popupMenu = NodePath("Options")
@@ -137,6 +140,7 @@ visualSettingsWindow = NodePath("../../../../VisualSettingsWindow")
 [node name="MenuBar" type="MenuBar" parent="VSplitContainer/TopMenuHBox"]
 layout_mode = 2
 theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("1001")
 theme_override_font_sizes/font_size = 16
 
 [node name="SettingsHBox" type="HBoxContainer" parent="VSplitContainer/TopMenuHBox"]
@@ -232,6 +236,7 @@ offset_right = 20.5
 offset_bottom = 8.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1001")
 theme_override_font_sizes/font_size = 16
 text = "Music"
 horizontal_alignment = 1
@@ -258,6 +263,7 @@ offset_right = 46.5
 offset_bottom = 24.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1001")
 theme_override_font_sizes/font_size = 16
 text = "Metronome"
 horizontal_alignment = 1
@@ -285,6 +291,7 @@ offset_right = 20.5
 offset_bottom = 8.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1001")
 theme_override_font_sizes/font_size = 16
 text = "Master"
 horizontal_alignment = 1

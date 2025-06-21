@@ -10,7 +10,9 @@ public partial class BpmLabel : Label
         //base._GuiInput(@event);
         if (@event is InputEventMouseButton mouseEvent)
         {
-            if (mouseEvent.DoubleClick)
+            // Trigger on double-click (any button) or single middle mouse button click
+            if ((mouseEvent.DoubleClick) ||
+                (mouseEvent.ButtonIndex == MouseButton.Middle && mouseEvent.Pressed))
             {
                 DoubleClicked?.Invoke(this, EventArgs.Empty);
             }

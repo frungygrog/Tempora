@@ -32,7 +32,7 @@ public partial class GridLine : Line2D
     private Color color_Unspecified = new Color(0, 0, 0.7f, 1f);
     private Color color_Downbeat = new Color(1f, 0.2f, 0.2f, 1f);
     private Color color_16 = new Color(0.7f, 0, 0, 1f);
-    private Color color_12 = new Color("7572ff");
+    private Color color_12 = new Color("5d5bcc");
 
     public GridLine(int[] timeSignature, int divisor, int index, float audioHeight)
     {
@@ -42,12 +42,14 @@ public partial class GridLine : Line2D
         this.audioHeight = audioHeight;
         RelativeMeasurePosition = Timing.GetRelativeNotePosition(timeSignature, divisor, index);
         //new ColorConverter();
-
+    
         DefaultColor = color_Unspecified;
         //DefaultColor = (Godot.Color) converter.ConvertFromString("#FFDFD991");
-
+    
         Width = 5;
-
+        BeginCapMode = LineCapMode.Round; // Make grid lines pill-shaped
+        EndCapMode = LineCapMode.Round;
+    
         UpdateColor();
         UpdatePoints();
     }

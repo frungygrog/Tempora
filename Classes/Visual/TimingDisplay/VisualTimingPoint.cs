@@ -107,6 +107,8 @@ public partial class VisualTimingPoint : Control
         flashTimer.Timeout += OnFlashTimerTimeout;
         lineColorDefault = OffsetLine.DefaultColor;
         lineDefaultWidth = OffsetLine.Width;
+        OffsetLine.BeginCapMode = Line2D.LineCapMode.Round;
+        OffsetLine.EndCapMode = Line2D.LineCapMode.Round;
     }
 
     public override void _Input(InputEvent @event)

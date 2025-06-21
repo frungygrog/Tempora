@@ -17,9 +17,9 @@ namespace Tempora.Classes.Visual;
 
 public readonly struct GlobalConstants
 {
-    public GlobalConstants() { }
-    public static readonly Color TemporaYellow = new("ff9900");
-    public static readonly Color TemporaBlue = new("002630");
-    public static readonly Color AudioFullExposure = new(1f, 1f, 1f);
-    public static readonly Color AudioDarkened = new(0.5f, 0.5f, 0.5f);
+	public GlobalConstants() { }
+	public static readonly Color TemporaYellow = new("ff9900");
+	public static readonly Color TemporaBlue = new("143338");
+	public static readonly Color AudioFullExposure = new(1f, 1f, 1f);
+	public static readonly Color AudioDarkened = new(0.5f, 0.5f, 0.5f);
 }

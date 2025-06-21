@@ -34,8 +34,8 @@ public partial class Main : Control
 	private AudioVisualsContainer audioVisualsContainer = null!;
 	[Export]
 	private BlockScrollBar blockScrollBar = null!;
-    [Export]
-    private ColorRect backgroundColorRect = null!;
+	[Export]
+	private ColorRect backgroundColorRect = null!;
 
 	private ProjectFileManager projectFileManager = null!;
 
@@ -44,16 +44,16 @@ public partial class Main : Control
 	{
 		projectFileManager = ProjectFileManager.Instance;
 
-        // This works in Debug if we use i.e. audioPath = "res://Audio/UMO.mp3",
-        // but won't work in production, as resources are converted to different file formats.
-        //Project.Instance.AudioFile = new AudioFile(audioPath);
+		// This works in Debug if we use i.e. audioPath = "res://Audio/UMO.mp3",
+		// but won't work in production, as resources are converted to different file formats.
+		//Project.Instance.AudioFile = new AudioFile(audioPath);
 
-        string autoSavePathLocal = $"{ProjectFileManager.AutoSavePath}{ProjectFileManager.ProjectFileExtension}";
-        string autoSavePathGlobal = ProjectSettings.GlobalizePath(autoSavePathLocal);
-        if (Godot.FileAccess.FileExists(autoSavePathGlobal))
-            ProjectFileManager.Instance.LoadProjectFromFilePath(autoSavePathGlobal);
-        else
-		    Project.Instance.AudioFile = new AudioFile(defaultMP3);
+		string autoSavePathLocal = $"{ProjectFileManager.AutoSavePath}{ProjectFileManager.ProjectFileExtension}";
+		string autoSavePathGlobal = ProjectSettings.GlobalizePath(autoSavePathLocal);
+		if (Godot.FileAccess.FileExists(autoSavePathGlobal))
+			ProjectFileManager.Instance.LoadProjectFromFilePath(autoSavePathGlobal);
+		else
+			Project.Instance.AudioFile = new AudioFile(defaultMP3);
 
 		GlobalEvents.Instance.SettingsChanged += OnSettingsChanged;
 		audioVisualsContainer.SeekPlaybackTime += OnSeekPlaybackTime;
@@ -63,7 +63,7 @@ public partial class Main : Control
 		blockScrollBar.UpdateLimits();
 		audioVisualsContainer.UpdateBlocksScroll();
 
-        backgroundColorRect.Color = GlobalConstants.TemporaBlue;
+		backgroundColorRect.Color = GlobalConstants.TemporaBlue;
 
 		MementoHandler.Instance.AddTimingMemento();
 	}
@@ -102,17 +102,17 @@ public partial class Main : Control
 		if (filePaths.Length != 1)
 			return;
 		string path = filePaths[0];
-        bool isAudioFile = AudioFile.IsAudioFileExtensionValid(path, out string extension);
+		bool isAudioFile = AudioFile.IsAudioFileExtensionValid(path, out string extension);
 
-        switch (extension) {
-            case var value when value == ProjectFileManager.ProjectFileExtension:
-                projectFileManager.LoadProjectFromFilePath(path);
-                break;
-            case var value when isAudioFile:
-		        var audioFile = new AudioFile(path);
-		        Project.Instance.AudioFile = audioFile;
-                break;
-        }
+		switch (extension) {
+			case var value when value == ProjectFileManager.ProjectFileExtension:
+				projectFileManager.LoadProjectFromFilePath(path);
+				break;
+			case var value when isAudioFile:
+				var audioFile = new AudioFile(path);
+				Project.Instance.AudioFile = audioFile;
+				break;
+		}
 	}
 
 	private void OnSeekPlaybackTime(object? sender, EventArgs e)

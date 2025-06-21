@@ -46,7 +46,7 @@ public partial class GridLine : Line2D
         DefaultColor = color_Unspecified;
         //DefaultColor = (Godot.Color) converter.ConvertFromString("#FFDFD991");
     
-        Width = 5;
+        Width = 4;
         BeginCapMode = LineCapMode.Round; // Make grid lines pill-shaped
         EndCapMode = LineCapMode.Round;
     

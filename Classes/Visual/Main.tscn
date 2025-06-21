@@ -57,6 +57,7 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 80.0
 grow_horizontal = 0
+grow_vertical = 2
 color = Color(0.101961, 0.176471, 0.172549, 1)
 
 [node name="TopMenuWrapper" type="Control" parent="."]

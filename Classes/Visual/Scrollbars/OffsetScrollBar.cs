@@ -17,7 +17,7 @@ namespace Tempora.Classes.Visual;
 
 public partial class OffsetScrollBar : LabeledScrollbarHorizontal
 {
-    protected override void UpdateValueLabel() => valueLabel.Text = (hScrollBar.Value * 100).ToString("0.0") + " %";
+    protected override void UpdateValueLabel() => valueLabel.Text = (hScrollBar.Value * 100).ToString("0.0") + "%";
 
     protected override void UpdateTarget() => Settings.Instance.DownbeatPositionOffset = (float)hScrollBar.Value;
 

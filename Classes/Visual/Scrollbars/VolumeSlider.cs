@@ -19,42 +19,89 @@ namespace Tempora.Classes.Visual;
 
 public partial class VolumeSlider : HScrollBar
 {
-    private int busIndex;
-    [Export] public string BusName = null!;
+	private int busIndex;
+	[Export] public string BusName = null!;
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        busIndex = AudioServer.GetBusIndex(BusName);
-        ValueChanged += OnValueChanged;
+	private Label? percentLabel;
 
-        float invertedValue = Mathf.DbToLinear(AudioServer.GetBusVolumeDb(busIndex));
-        //Value = Math.Abs(1 - invertedValue);
+	public override void _Ready()
+	{
+		busIndex = AudioServer.GetBusIndex(BusName);
+		ValueChanged += OnValueChanged;
 
-        Value = invertedValue;
-    }
+		// Create and configure the percent label
+		percentLabel = new Label();
+		percentLabel.Text = GetPercentText(Value);
+		percentLabel.AddThemeFontOverride("font", GD.Load<Font>("res://Fonts/TorusBoldFont.tres"));
+		percentLabel.AddThemeFontSizeOverride("font_size", 11);
+		percentLabel.AddThemeColorOverride("font_color", new Color(1, 1, 1, 1));
+		percentLabel.AddThemeColorOverride("font_outline_color", new Color(0, 0, 0, 1));
+		percentLabel.AddThemeConstantOverride("outline_size", 6);
+		percentLabel.HorizontalAlignment = HorizontalAlignment.Center;
+		percentLabel.VerticalAlignment = VerticalAlignment.Top;
+		percentLabel.SizeFlagsHorizontal = SizeFlags.ShrinkCenter;
+		percentLabel.SizeFlagsVertical = SizeFlags.ShrinkCenter;
+		percentLabel.MouseFilter = MouseFilterEnum.Ignore;
+		AddChild(percentLabel);
 
-    private void OnValueChanged(double value)
-    {
-        AudioServer.SetBusVolumeDb(
-            busIndex,
-            Mathf.LinearToDb((float)value));
-        SaveToSettings(value);
-    }
+		float invertedValue = Mathf.DbToLinear(AudioServer.GetBusVolumeDb(busIndex));
+		Value = invertedValue;
 
-    private void SaveToSettings(double value)
-    {
-        switch (BusName)
-        {
-            case "Music":
-                Settings.Instance.MusicVolumeNormalized = value;
-                break;
-            case "Metronome":
-                Settings.Instance.MetronomeVolumeNormalized = value;
-                break;
-            case "Master":
-                Settings.Instance.MasterVolumeNormalized = value;
-                break;
-        }
-    }
+		UpdatePercentLabel();
+	}
+
+	private void OnValueChanged(double value)
+	{
+		AudioServer.SetBusVolumeDb(
+			busIndex,
+			Mathf.LinearToDb((float)value));
+		SaveToSettings(value);
+		UpdatePercentLabel();
+	}
+
+	private void SaveToSettings(double value)
+	{
+		switch (BusName)
+		{
+			case "Music":
+				Settings.Instance.MusicVolumeNormalized = value;
+				break;
+			case "Metronome":
+				Settings.Instance.MetronomeVolumeNormalized = value;
+				break;
+			case "Master":
+				Settings.Instance.MasterVolumeNormalized = value;
+				break;
+		}
+	}
+
+	private string GetPercentText(double value)
+	{
+		return $"{Mathf.RoundToInt((float)(value * 100))}%";
+	}
+
+	private void UpdatePercentLabel()
+	{
+		if (percentLabel == null)
+			return;
+
+		// Update text
+		percentLabel.Text = GetPercentText(Value);
+
+		// Calculate the position of the grabber/handle
+		float ratio = (float)((Value - MinValue) / (MaxValue - MinValue));
+		float handleWidth = 16.0f; // Default Godot handle size, adjust if themed
+		float x = ratio * (Size.X - handleWidth) + handleWidth / 2.0f;
+
+		// Position the label below the handle
+		float y = Size.Y + 2.0f; // 2px below the slider
+
+		percentLabel.Position = new Vector2(x - percentLabel.Size.X / 2.0f, y);
+	}
+
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+		UpdatePercentLabel();
+	}
 }
